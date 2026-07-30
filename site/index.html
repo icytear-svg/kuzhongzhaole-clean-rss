@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>苦中找乐 · 干净 RSS</title>
+    <meta
+      name="description"
+      content="保留完整 shownotes、图片与原始音频，移除平台导流信息的播客 RSS。"
+    />
+    <meta property="og:title" content="苦中找乐 · 干净 RSS" />
+    <meta
+      property="og:description"
+      content="完整保留 shownotes、图片与原始音频，只移除平台添加的导流信息。"
+    />
+    <meta
+      property="og:image"
+      content="https://icytear-svg.github.io/kuzhongzhaole-clean-rss/og.png"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="苦中找乐"
+      href="./feed.xml"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">苦中找乐 · PODCAST FEED</p>
+        <div class="mark" aria-hidden="true">RSS</div>
+        <h1 id="page-title">完整内容，干净分发。</h1>
+        <p class="lede">
+          这是一条为《苦中找乐》生成的干净 RSS。它保留每期完整
+          shownotes、图片、时间戳和原始音频，同时移除小宇宙添加的导流文字与节目页链接。
+        </p>
+
+        <div class="status-row" aria-label="Feed 状态">
+          <span><b id="episode-count">113</b> 期</span>
+          <span>GUID 保持不变</span>
+          <span>音频地址保持不变</span>
+        </div>
+
+        <div class="feed-card">
+          <div>
+            <p class="card-label">PUBLIC RSS ENDPOINT</p>
+            <code>…/feed.xml</code>
+          </div>
+          <a class="feed-link" href="./feed.xml">
+            打开 Feed
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="details" aria-label="处理说明">
+        <article>
+          <span class="number">01</span>
+          <h2>完整保留</h2>
+          <p>正文、时间戳、图片与格式来自公开单集页，不使用被截断的简介。</p>
+        </article>
+        <article>
+          <span class="number">02</span>
+          <h2>只去导流</h2>
+          <p>清除平台导流文案和可点击节目页链接，不改动节目本身的内容。</p>
+        </article>
+        <article>
+          <span class="number">03</span>
+          <h2>身份不变</h2>
+          <p>保留原 GUID、发布日期与 enclosure，降低平台产生重复单集的风险。</p>
+        </article>
+      </section>
+
+      <footer>
+        <span>每 6 小时自动检查更新</span>
+        <span>静态 Feed · 无跟踪 · 无登录</span>
+      </footer>
+    </main>
+    <script>
+      fetch("./feed.xml")
+        .then((response) => response.text())
+        .then((xml) => {
+          const documentXml = new DOMParser().parseFromString(xml, "text/xml");
+          const count = documentXml.querySelectorAll("item").length;
+          if (count > 0) document.querySelector("#episode-count").textContent = count;
+        })
+        .catch(() => {});
+    </script>
+  </body>
+</html>

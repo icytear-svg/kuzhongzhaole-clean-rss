@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+site/feed.xml
+site/manifest.json
+site/audit.md
+site/shownotes/
